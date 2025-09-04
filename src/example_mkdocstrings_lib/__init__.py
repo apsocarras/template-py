@@ -5,6 +5,13 @@ With the plugin it just becomes the index/landing page for the library.
 
 TEST! I'M DIFFERENT. I'm different again. Use mkdocs serve --watch src/ for live changes.
 Test!
+
+After adding a new file/directory (e.g. projects, projects/__init__.py, projects/foo.py),
+
+* mkdocs build
+* mkdocs serve
+
+# Testing MkDown
 """
 
 

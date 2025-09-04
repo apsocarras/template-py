@@ -2,6 +2,7 @@
 Generate the code reference pages and navigation.
 See: https://lukasatkinson.de/dump/2023-08-25-python-docstrings-sphinx/
 The author suggests using Jinja templates
+    (For example -- the index pages are right now all empty. It would be much better if they contained links to submodules)
 """
 
 from pathlib import Path
