@@ -1,0 +1,4 @@
+site_name: Example library using mkdocs (mkdocs material, mkdocstrings, mkdocs-gen-files)
+site_url: http://localhost:8080/
+theme: 
+    name: material
