@@ -8,6 +8,7 @@ plugins:
         scripts: 
             - docs/gen_api_docs.py
     - mkdocstrings
+    - section-index
     - literate-nav:
         nav_file: SUMMARY.md
 nav: 
