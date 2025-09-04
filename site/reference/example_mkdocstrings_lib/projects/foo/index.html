@@ -541,7 +541,7 @@
 
 
 <h2 id="example_mkdocstrings_lib.projects.foo.interject_with_foo" class="doc doc-heading">
-            <code class="highlight language-python"><span class="n">interject_with_foo</span><span class="p">(</span><span class="o">*</span><span class="n">words</span><span class="p">)</span></code>
+            <code class="highlight language-python"><span style="color: #E6EDF3">interject_with_foo(</span><span style="color: #FF7B72; font-weight: bold">*</span><span style="color: #E6EDF3">words)</span></code>
 
 </h2>
 
@@ -554,67 +554,67 @@
 <li>It now works by adding - pymdownx.superfences to the mkdocs.yaml</li>
 <li>Add pymdownx.tilde for tilde strikethrough</li>
 </ul>
-<div class="language-pycon highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">80085</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">interject_with_foo</span><span class="p">(</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;world&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">):</span>
-<span class="gp">... </span><span class="nb">print</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
-<span class="go">Hell-FOO!...o</span>
-<span class="go">w-FOO!...orld</span>
-<span class="go">...foo?</span>
+<div class="language-pycon highlight" style="background: #0d1117"><pre style="line-height: 125%;"><span></span><code><span style="color: #8B949E">&gt;&gt;&gt; </span><span style="color: #FF7B72">import</span><span style="color: #6E7681"> </span><span style="color: #FF7B72">random</span>
+<span style="color: #8B949E">&gt;&gt;&gt; </span><span style="color: #E6EDF3">random</span><span style="color: #FF7B72; font-weight: bold">.</span><span style="color: #E6EDF3">seed(</span><span style="color: #A5D6FF">80085</span><span style="color: #E6EDF3">)</span>
+<span style="color: #8B949E">&gt;&gt;&gt; </span><span style="color: #FF7B72">for</span> <span style="color: #E6EDF3">word</span> <span style="color: #FF7B72; font-weight: bold">in</span> <span style="color: #E6EDF3">interject_with_foo(</span><span style="color: #A5D6FF">&quot;Hello&quot;</span><span style="color: #E6EDF3">,</span> <span style="color: #A5D6FF">&quot;world&quot;</span><span style="color: #E6EDF3">,</span> <span style="color: #A5D6FF">&quot;&quot;</span><span style="color: #E6EDF3">):</span>
+<span style="color: #8B949E">... </span>    <span style="color: #E6EDF3">print(word)</span>
+<span style="color: #8B949E">Hell-FOO!...o</span>
+<span style="color: #8B949E">w-FOO!...orld</span>
+<span style="color: #8B949E">...foo?</span>
 </code></pre></div>
 
 
             <details class="quote">
               <summary>Source code in <code>src/example_mkdocstrings_lib/projects/foo.py</code></summary>
-              <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 5</span>
-<span class="normal"> 6</span>
-<span class="normal"> 7</span>
-<span class="normal"> 8</span>
-<span class="normal"> 9</span>
-<span class="normal">10</span>
-<span class="normal">11</span>
-<span class="normal">12</span>
-<span class="normal">13</span>
-<span class="normal">14</span>
-<span class="normal">15</span>
-<span class="normal">16</span>
-<span class="normal">17</span>
-<span class="normal">18</span>
-<span class="normal">19</span>
-<span class="normal">20</span>
-<span class="normal">21</span>
-<span class="normal">22</span>
-<span class="normal">23</span>
-<span class="normal">24</span>
-<span class="normal">25</span>
-<span class="normal">26</span>
-<span class="normal">27</span>
-<span class="normal">28</span>
-<span class="normal">29</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">interject_with_foo</span><span class="p">(</span><span class="o">*</span><span class="n">words</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Generator</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Changed to escape with `pycon`.</span>
+              <div class="language-python highlight" style="background: #0d1117"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span style="color: #6e7681; background-color: #0d1117; padding-left: 5px; padding-right: 5px;"> 5</span>
+<span style="color: #6e7681; background-color: #0d1117; padding-left: 5px; padding-right: 5px;"> 6</span>
+<span style="color: #6e7681; background-color: #0d1117; padding-left: 5px; padding-right: 5px;"> 7</span>
+<span style="color: #6e7681; background-color: #0d1117; padding-left: 5px; padding-right: 5px;"> 8</span>
+<span style="color: #6e7681; background-color: #0d1117; padding-left: 5px; padding-right: 5px;"> 9</span>
+<span style="color: #6e7681; background-color: #0d1117; padding-left: 5px; padding-right: 5px;">10</span>
+<span style="color: #6e7681; background-color: #0d1117; padding-left: 5px; padding-right: 5px;">11</span>
+<span style="color: #6e7681; background-color: #0d1117; padding-left: 5px; padding-right: 5px;">12</span>
+<span style="color: #6e7681; background-color: #0d1117; padding-left: 5px; padding-right: 5px;">13</span>
+<span style="color: #6e7681; background-color: #0d1117; padding-left: 5px; padding-right: 5px;">14</span>
+<span style="color: #6e7681; background-color: #0d1117; padding-left: 5px; padding-right: 5px;">15</span>
+<span style="color: #6e7681; background-color: #0d1117; padding-left: 5px; padding-right: 5px;">16</span>
+<span style="color: #6e7681; background-color: #0d1117; padding-left: 5px; padding-right: 5px;">17</span>
+<span style="color: #6e7681; background-color: #0d1117; padding-left: 5px; padding-right: 5px;">18</span>
+<span style="color: #6e7681; background-color: #0d1117; padding-left: 5px; padding-right: 5px;">19</span>
+<span style="color: #6e7681; background-color: #0d1117; padding-left: 5px; padding-right: 5px;">20</span>
+<span style="color: #6e7681; background-color: #0d1117; padding-left: 5px; padding-right: 5px;">21</span>
+<span style="color: #6e7681; background-color: #0d1117; padding-left: 5px; padding-right: 5px;">22</span>
+<span style="color: #6e7681; background-color: #0d1117; padding-left: 5px; padding-right: 5px;">23</span>
+<span style="color: #6e7681; background-color: #0d1117; padding-left: 5px; padding-right: 5px;">24</span>
+<span style="color: #6e7681; background-color: #0d1117; padding-left: 5px; padding-right: 5px;">25</span>
+<span style="color: #6e7681; background-color: #0d1117; padding-left: 5px; padding-right: 5px;">26</span>
+<span style="color: #6e7681; background-color: #0d1117; padding-left: 5px; padding-right: 5px;">27</span>
+<span style="color: #6e7681; background-color: #0d1117; padding-left: 5px; padding-right: 5px;">28</span>
+<span style="color: #6e7681; background-color: #0d1117; padding-left: 5px; padding-right: 5px;">29</span></pre></div></td><td class="code"><div><pre style="line-height: 125%;"><span></span><code><span style="color: #FF7B72">def</span><span style="color: #6E7681"> </span><span style="color: #D2A8FF; font-weight: bold">interject_with_foo</span><span style="color: #E6EDF3">(</span><span style="color: #FF7B72; font-weight: bold">*</span><span style="color: #E6EDF3">words:</span> <span style="color: #E6EDF3">str)</span> <span style="color: #FF7B72; font-weight: bold">-&gt;</span> <span style="color: #E6EDF3">Generator[str,</span> <span style="color: #E6EDF3">str,</span> <span style="color: #79C0FF">None</span><span style="color: #E6EDF3">]:</span>
+<span style="color: #6E7681">    </span><span style="color: #A5D6FF">&quot;&quot;&quot;</span>
+<span style="color: #A5D6FF">    Changed to escape with `pycon`.</span>
 
-<span class="sd">    * ~~Pygments syntax highlighting isn&#39;t working (yet)~~</span>
-<span class="sd">    * It now works by adding - pymdownx.superfences to the mkdocs.yaml</span>
-<span class="sd">    * Add pymdownx.tilde for tilde strikethrough</span>
+<span style="color: #A5D6FF">    * ~~Pygments syntax highlighting isn&#39;t working (yet)~~</span>
+<span style="color: #A5D6FF">    * It now works by adding - pymdownx.superfences to the mkdocs.yaml</span>
+<span style="color: #A5D6FF">    * Add pymdownx.tilde for tilde strikethrough</span>
 
-<span class="sd">    ```pycon</span>
-<span class="sd">    &gt;&gt;&gt; import random</span>
-<span class="sd">    &gt;&gt;&gt; random.seed(80085)</span>
-<span class="sd">    &gt;&gt;&gt; for word in interject_with_foo(&quot;Hello&quot;, &quot;world&quot;, &quot;&quot;):</span>
-<span class="sd">    ... print(word)</span>
-<span class="sd">    Hell-FOO!...o</span>
-<span class="sd">    w-FOO!...orld</span>
-<span class="sd">    ...foo?</span>
+<span style="color: #A5D6FF">    ```pycon</span>
+<span style="color: #A5D6FF">    &gt;&gt;&gt; import random</span>
+<span style="color: #A5D6FF">    &gt;&gt;&gt; random.seed(80085)</span>
+<span style="color: #A5D6FF">    &gt;&gt;&gt; for word in interject_with_foo(&quot;Hello&quot;, &quot;world&quot;, &quot;&quot;):</span>
+<span style="color: #A5D6FF">    ...     print(word)</span>
+<span style="color: #A5D6FF">    Hell-FOO!...o</span>
+<span style="color: #A5D6FF">    w-FOO!...orld</span>
+<span style="color: #A5D6FF">    ...foo?</span>
 
-<span class="sd">    ```</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">words</span><span class="p">:</span>
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">word</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">yield</span> <span class="s2">&quot;...foo?&quot;</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">idx</span> <span class="o">=</span> <span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">word</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
-            <span class="k">yield</span> <span class="n">word</span><span class="p">[:</span><span class="n">idx</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;-FOO!...&quot;</span> <span class="o">+</span> <span class="n">word</span><span class="p">[</span><span class="n">idx</span><span class="p">:]</span>
+<span style="color: #A5D6FF">    ```</span>
+<span style="color: #A5D6FF">    &quot;&quot;&quot;</span>
+    <span style="color: #FF7B72">for</span> <span style="color: #E6EDF3">word</span> <span style="color: #FF7B72; font-weight: bold">in</span> <span style="color: #E6EDF3">words:</span>
+        <span style="color: #FF7B72">if</span> <span style="color: #E6EDF3">len(word)</span> <span style="color: #FF7B72; font-weight: bold">==</span> <span style="color: #A5D6FF">0</span><span style="color: #E6EDF3">:</span>
+            <span style="color: #FF7B72">yield</span> <span style="color: #A5D6FF">&quot;...foo?&quot;</span>
+        <span style="color: #FF7B72">else</span><span style="color: #E6EDF3">:</span>
+            <span style="color: #E6EDF3">idx</span> <span style="color: #FF7B72; font-weight: bold">=</span> <span style="color: #E6EDF3">randint(</span><span style="color: #A5D6FF">0</span><span style="color: #E6EDF3">,</span> <span style="color: #E6EDF3">len(word)</span> <span style="color: #FF7B72; font-weight: bold">-</span> <span style="color: #A5D6FF">1</span><span style="color: #E6EDF3">)</span>
+            <span style="color: #FF7B72">yield</span> <span style="color: #E6EDF3">word[:idx]</span> <span style="color: #FF7B72; font-weight: bold">+</span> <span style="color: #A5D6FF">&quot;-FOO!...&quot;</span> <span style="color: #FF7B72; font-weight: bold">+</span> <span style="color: #E6EDF3">word[idx:]</span>
 </code></pre></div></td></tr></table></div>
             </details>
     </div>

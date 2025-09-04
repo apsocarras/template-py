@@ -2,14 +2,17 @@
     user-select: none;
 }
 
+.codehilite .linenos {
+    display: none;
+}
 /* 
 These CSS classes depend on the handler. 
 They are designed to omit the doc strings from the source code blocks, 
 since the handler (is supposed to) render those in the main documentation page.
 
-This workaround is unfortunately janky and messes with line numbers
+This workaround is unfortunately janky and leaves blank line numbers
 */
-/* 
+
 .doc-contents details .highlight code {
   line-height: 0;
 }
@@ -17,10 +20,6 @@ This workaround is unfortunately janky and messes with line numbers
   line-height: initial;
 }
 /* Literal.String.Doc */
-/* .doc-contents details .highlight code > .sd {  
+.doc-contents details .highlight code > .sd {  
   display: none;
 }  
-.doc-contents details .highlight code > .sd {
-  position: absolute;
-  left: -9999px;
-}  */

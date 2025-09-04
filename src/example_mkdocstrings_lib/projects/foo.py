@@ -14,7 +14,7 @@ def interject_with_foo(*words: str) -> Generator[str, str, None]:
     >>> import random
     >>> random.seed(80085)
     >>> for word in interject_with_foo("Hello", "world", ""):
-    ... print(word)
+    ...     print(word)
     Hell-FOO!...o
     w-FOO!...orld
     ...foo?
@@ -27,3 +27,9 @@ def interject_with_foo(*words: str) -> Generator[str, str, None]:
         else:
             idx = randint(0, len(word) - 1)
             yield word[:idx] + "-FOO!..." + word[idx:]
+
+
+if __name__ == "__main__":
+    import doctest
+
+    _ = doctest.testmod()
