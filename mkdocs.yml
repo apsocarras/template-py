@@ -5,6 +5,9 @@ theme:
     features: 
     - content.code.copy
     - content.code.select
+    - navigation.tabs
+    - navigation.instant
+    - navigation.sections
     palette:
         - scheme: slate
           primary: deep blue

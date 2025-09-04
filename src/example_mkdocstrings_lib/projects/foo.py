@@ -12,11 +12,11 @@ def interject_with_foo(*words: str) -> Generator[str, str, None]:
 
     ```pycon
     >>> import random
-    >>> random.seed(80085)
+    >>> random.seed(1238)
     >>> for word in interject_with_foo("Hello", "world", ""):
     ...     print(word)
-    Hell-FOO!...o
-    w-FOO!...orld
+    FOO!...Hello
+    wor-FOO!...ld
     ...foo?
 
     ```
@@ -26,10 +26,12 @@ def interject_with_foo(*words: str) -> Generator[str, str, None]:
             yield "...foo?"
         else:
             idx = randint(0, len(word) - 1)
-            yield word[:idx] + "-FOO!..." + word[idx:]
+            yield word[:idx] + f"{'-' if idx != 0 else ''}FOO!..." + word[idx:]
 
 
 if __name__ == "__main__":
     import doctest
 
     _ = doctest.testmod()
+
+    # Run tests defined in your docstrings.

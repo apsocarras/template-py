@@ -1,4 +1,12 @@
 """
+
+Welcome to WCK's future python documentation.
+
+Live edits in your python project show up in your web-based docs.
+
+The code for the proxy has to be shared across multiple functions, and
+includes other reusable utiltiies for future cloud functions.
+
 Without section-index plugin, init is a separate entry in the nav bar.
 
 With the plugin it just becomes the index/landing page for the library.
