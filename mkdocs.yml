@@ -5,6 +5,19 @@ theme:
     features: 
     - content.code.copy
     - content.code.select
+    palette:
+        - scheme: slate
+          primary: deep blue
+          accent: orange 
+          toggle:  
+            icon: material/lightbulb-outline
+            name: Switch to light mode
+        - scheme: default
+          primary: blue
+          accent: deep orange 
+          toggle:  
+            icon: material/lightbulb
+            name: Switch to dark mode
 plugins: 
     - search 
     - gen-files: 
