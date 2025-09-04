@@ -13,3 +13,8 @@ plugins:
         nav_file: SUMMARY.md
 nav: 
     - Code Reference: reference/
+
+markdown_extensions:
+- pymdownx.highlight:
+    use_pygments: true
+    pygments_lang_class: true

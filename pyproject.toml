@@ -22,4 +22,6 @@ dev = [
     "mkdocs-section-index>=0.3.10",
     "mkdocstrings>=0.30.0",
     "mkdocstrings-python>=1.18.2",
+    "pygments>=2.19.2",
+    "pymdown-extensions>=10.16.1",
 ]
