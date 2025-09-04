@@ -407,6 +407,15 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#example_mkdocstrings_lib.projects.foo.interject_with_foo" class="md-nav__link">
+    <span class="md-ellipsis">
+      interject_with_foo
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -472,6 +481,15 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#example_mkdocstrings_lib.projects.foo.interject_with_foo" class="md-nav__link">
+    <span class="md-ellipsis">
+      interject_with_foo
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -503,6 +521,91 @@
 
 
 
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="example_mkdocstrings_lib.projects.foo.interject_with_foo" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">interject_with_foo</span><span class="p">(</span><span class="o">*</span><span class="n">words</span><span class="p">)</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Example function to illustrate what happens when you don't escape doctests with <code>pycon</code></p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>import random
+random.seed(80085)
+for word in interject_with_foo("Hello", "world", ""):
+... print(word)
+Hell-FOO!...o
+w-FOO!...orld
+...foo?</p>
+</blockquote>
+</blockquote>
+</blockquote>
+
+
+            <details class="quote">
+              <summary>Source code in <code>src/example_mkdocstrings_lib/projects/foo.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">interject_with_foo</span><span class="p">(</span><span class="o">*</span><span class="n">words</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Generator</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Example function to illustrate what happens when you don&#39;t escape doctests with `pycon`</span>
+<span class="sd">    &gt;&gt;&gt; import random</span>
+<span class="sd">    &gt;&gt;&gt; random.seed(80085)</span>
+<span class="sd">    &gt;&gt;&gt; for word in interject_with_foo(&quot;Hello&quot;, &quot;world&quot;, &quot;&quot;):</span>
+<span class="sd">    ... print(word)</span>
+<span class="sd">    Hell-FOO!...o</span>
+<span class="sd">    w-FOO!...orld</span>
+<span class="sd">    ...foo?</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">words</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">word</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">yield</span> <span class="s2">&quot;...foo?&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">idx</span> <span class="o">=</span> <span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">word</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="k">yield</span> <span class="n">word</span><span class="p">[:</span><span class="n">idx</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;-FOO!...&quot;</span> <span class="o">+</span> <span class="n">word</span><span class="p">[</span><span class="n">idx</span><span class="p">:]</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+
+
+  </div>
 
     </div>
 
