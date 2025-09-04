@@ -1,0 +1,1 @@
+::: example_mkdocstrings_lib.MyClass
