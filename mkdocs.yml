@@ -2,6 +2,8 @@ site_name: Example library using mkdocs (mkdocs material, mkdocstrings, mkdocs-g
 site_url: http://localhost:8080/
 theme: 
     name: material
+    features: 
+    - content.code.copy
 plugins: 
     - search 
     - gen-files: 
@@ -18,3 +20,5 @@ markdown_extensions:
 - pymdownx.highlight:
     use_pygments: true
     pygments_lang_class: true
+- pymdownx.superfences
+- pymdownx.tilde

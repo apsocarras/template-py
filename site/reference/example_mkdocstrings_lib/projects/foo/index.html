@@ -546,20 +546,16 @@
 
     <div class="doc doc-contents ">
 
-        <p>Example function to illustrate what happens when you don't escape doctests with <code>pycon</code></p>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>import random
-random.seed(80085)
-for word in interject_with_foo("Hello", "world", ""):
+        <p>Changed to escape with <code>pycon</code>. Pygments syntax highlighting isn't working (yet)</p>
+<pre><code class="language-pycon">&gt;&gt;&gt; import random
+&gt;&gt;&gt; random.seed(80085)
+&gt;&gt;&gt; for word in interject_with_foo(&quot;Hello&quot;, &quot;world&quot;, &quot;&quot;):
 ... print(word)
 Hell-FOO!...o
 w-FOO!...orld
-...foo?</p>
-</blockquote>
-</blockquote>
-</blockquote>
+...foo?
+
+</code></pre>
 
 
             <details class="quote">
@@ -580,9 +576,15 @@ w-FOO!...orld
 <span class="normal">18</span>
 <span class="normal">19</span>
 <span class="normal">20</span>
-<span class="normal">21</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">interject_with_foo</span><span class="p">(</span><span class="o">*</span><span class="n">words</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Generator</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">interject_with_foo</span><span class="p">(</span><span class="o">*</span><span class="n">words</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Generator</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Example function to illustrate what happens when you don&#39;t escape doctests with `pycon`</span>
+<span class="sd">    Changed to escape with `pycon`. Pygments syntax highlighting isn&#39;t working (yet)</span>
+
+<span class="sd">    ```pycon</span>
 <span class="sd">    &gt;&gt;&gt; import random</span>
 <span class="sd">    &gt;&gt;&gt; random.seed(80085)</span>
 <span class="sd">    &gt;&gt;&gt; for word in interject_with_foo(&quot;Hello&quot;, &quot;world&quot;, &quot;&quot;):</span>
@@ -590,6 +592,8 @@ w-FOO!...orld
 <span class="sd">    Hell-FOO!...o</span>
 <span class="sd">    w-FOO!...orld</span>
 <span class="sd">    ...foo?</span>
+
+<span class="sd">    ```</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">words</span><span class="p">:</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">word</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
@@ -658,7 +662,7 @@ w-FOO!...orld
     
     
       
-      <script id="__config" type="application/json">{"base": "../../../..", "features": [], "search": "../../../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"base": "../../../..", "features": ["content.code.copy"], "search": "../../../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
       <script src="../../../../assets/javascripts/bundle.92b07e13.min.js"></script>
