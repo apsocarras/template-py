@@ -1,3 +1,25 @@
 .language-pycon .gp, .language-pycon .go { /* Generic.Prompt, Generic.Output */
     user-select: none;
 }
+
+.codehilite .linenos {
+    display: none;
+}
+/* 
+These CSS classes depend on the handler. 
+They are designed to omit the doc strings from the source code blocks, 
+since the handler (is supposed to) render those in the main documentation page.
+
+This workaround is unfortunately janky and leaves blank line numbers
+*/
+
+.doc-contents details .highlight code {
+  line-height: 0;
+}
+.doc-contents details .highlight code > * {
+  line-height: initial;
+}
+/* Literal.String.Doc */
+.doc-contents details .highlight code > .sd {  
+  display: none;
+}  
