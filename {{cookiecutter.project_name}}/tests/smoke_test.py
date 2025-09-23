@@ -3,13 +3,16 @@
 They point to something more fundamentally wrong in your setup.
 """
 
+from __future__ import annotations
+
 import importlib
 import pkgutil
 from collections.abc import Iterator
 
 
 def iter_modules(package) -> Iterator[pkgutil.ModuleInfo]:
-    return pkgutil.walk_packages(package.__path__, package.__name__ + ".")
+    pkg = importlib.import_module("{{cookiecutter.pkg_clean_name}}")
+    return pkgutil.walk_packages(pkg.__path__, pkg.__name__ + ".")
 
 
 def test_all_imports():

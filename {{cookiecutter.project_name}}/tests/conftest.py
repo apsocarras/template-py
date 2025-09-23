@@ -5,7 +5,6 @@ import dotenv
 import pytest
 from beartype.claw import beartype_package
 
-logging.getLogger("main").setLevel(logging.DEBUG)
 logger = logging.getLogger(__name__)
 
 # RUNTIME TYPE CHECKING - only enable during testing
