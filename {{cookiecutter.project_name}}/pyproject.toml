@@ -8,13 +8,14 @@ dependencies = [
     "attrs>=25.3.0",
     "cattrs>=25.2.0",
     "python-json-logger>=3.3.0",
-    {% if cookiecutter.ff_http -%}
-    "httpx>=0.28.1",
+    {% if cookiecutter.ff_type == "http" -%}
     "functions-framework>=3.9.2",
-    "functions-framework>=3.9.2",
-    "google-cloud-pubsub>=2.31.1",
     "google-cloud-secret-manager>=2.24.0",
-    "google-cloud-storage>=3.3.1",
+    "httpx>=0.28.1",
+    {% elif cookiecutter.ff_type == "pubsub" %}
+    "functions-framework>=3.9.2",
+    "google-cloud-secret-manager>=2.24.0",
+    "google-cloud-pubsub>=2.31.1",
     "google-events>=0.14.0",
     {%- endif -%}
 ]

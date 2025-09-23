@@ -5,8 +5,8 @@
   "proj_description": "A short description of the project",
   "pkg_clean_name": "{{ cookiecutter.pkg_name|lower|replace('-', '_')|replace(' ', '_') }}",
   "py_runtime": ["3.12"],
-  "ff_http": [true, false],
-  "ff_pubsub": [true, false],
+  "ff_type": ["none", "http", "pubsub"],
   "gcp_project": "<name-of-project>",
-  "gcp_region": "us-central1"
+  "gcp_region": "us-central1",
+  "keep_features_dir": [false, true]
 }
