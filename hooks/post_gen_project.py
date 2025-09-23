@@ -8,11 +8,6 @@ from __future__ import annotations
 
 import shutil
 from pathlib import Path
-from typing import TYPE_CHECKING
-
-if TYPE_CHECKING:
-    pass
-
 
 PROJECT_ROOT = Path.cwd()
 FEATURES_DIR = PROJECT_ROOT / "_cookie_features"
