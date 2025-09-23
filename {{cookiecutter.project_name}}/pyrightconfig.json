@@ -1,0 +1,11 @@
+{
+    "exclude": [
+        "**/build",
+        "**/dist",
+        "**/.venv"
+    ],
+    "reportDeprecated": "error",
+    "reportDeprecatedMember": "error",
+    "excludeDeprecated": true
+
+}

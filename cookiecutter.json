@@ -1,0 +1,12 @@
+{
+  "project_name": "my_project",  
+  "pkg_name": "{{ cookiecutter.project_name }}",
+  "author_name": "Alexander Socarras",
+  "proj_description": "A short description of the project",
+  "pkg_clean_name": "{{ cookiecutter.pkg_name|lower|replace('-', '_')|replace(' ', '_') }}",
+  "py_runtime": ["3.12"],
+  "ff_http": [true, false],
+  "ff_pubsub": [true, false],
+  "gcp_project": "<name-of-project>",
+  "gcp_region": "us-central1"
+}

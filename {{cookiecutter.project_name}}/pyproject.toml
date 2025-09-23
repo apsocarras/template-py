@@ -1,0 +1,75 @@
+[project]
+name = "{{cookiecutter.pkg_name}}"
+version = "0.1.0"
+description = "{{cookiecutter.proj_description}}"
+readme = "README.md"
+requires-python = ">={{cookiecutter.py_runtime}}"
+dependencies = []
+
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[dependency-groups]
+dev = [
+    "debugpy>=1.8.16",
+    "ipykernel>=6.30.1",
+    "mypy>=1.17.1",
+    "ruff>=0.12.11",
+]
+
+test = [
+    "beartype>=0.21.0",
+    "python-dotenv>=1.1.1",
+    "coverage>=7.10.6",
+    "hypothesis>=6.139.1",
+    "hypothesis-jsonschema>=0.23.1",
+    "mimesis>=18.0.0",
+    "pytest>=8.4.1",
+    "python-dotenv>=1.1.1",
+]
+
+docs = [
+    "mkdocs>=1.6.1",
+    "mkdocs-gen-files>=0.5.0",
+    "mkdocs-literate-nav>=0.6.2",
+    "mkdocs-material>=9.6.18",
+    "mkdocs-section-index>=0.3.10",
+    "mkdocstrings>=0.30.0",
+    "mkdocstrings-python>=1.18.2",
+    "pygments>=2.19.2",
+    "pymdown-extensions>=10.16.1",
+]
+
+[tool.ruff]
+extend-exclude = [
+    "deprecated/", 
+    "libs/",
+]
+unsafe-fixes = true
+line-length = 88
+
+target-version = py{{ cookiecutter.py_runtime | string | replace('.', '') }}
+
+
+[tool.ruff.format]
+docstring-code-format = true
+docstring-code-line-length = "dynamic"
+quote-style = "double"
+## indent-style = "double"
+skip-magic-trailing-comma = false
+
+[tool.mypy]
+follow_imports = "silent"
+warn_redundant_casts = true
+warn_unused_ignores = true
+disallow_any_generics = true
+no_implicit_reexport = true
+disallow_untyped_defs = true
+
+[tool.ruff.lint]
+# We can name lambdas, but be careful
+ignore=["E731"]
+future-annotations = true
+fixable = ["ALL"]
+unfixable = []

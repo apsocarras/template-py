@@ -1,0 +1,78 @@
+## .justfile for managing python-specific dev tasks
+# Inspired by this informative article: https://lukasatkinson.de/2025/just-dont-tox/
+
+## Globals/env 
+PYTHON_RUNTIME := `echo python$(cat .python-version)`
+REPO := `basename "$PWD" | tr ' ' '_'`
+VENDOR_DIR := "libs/"
+DEPRECATED := "deprecated/"
+
+## Commands 
+set shell := ['uv', 'run', 'bash', '-euxo', 'pipefail', '-c']
+set positional-arguments 
+
+qa *args: lint type_src (test) cov
+
+compose: 
+    docker compose up -d 
+
+cov: 
+    coverage html
+
+test *args:
+    coverage run -m pytest -q -s \
+      --ignore={%raw%}{{VENDOR_DIR}}{%endraw%} \
+      tests/ "$@"
+
+lint *args:
+    ruff check "$@"
+
+type *args:
+    mypy "$@"
+
+type_main: 
+    mypy main 
+
+type_utils: 
+    mypy utils/
+
+type_src: 
+    mypy SRC
+
+py312 *args: 
+    #!/bin/sh
+    uv run --isolated --python=3.12 pytest -q -s \
+      --ignore={%raw%}{{VENDOR_DIR}}{%endraw%} \
+      tests/ "$@"
+
+toml_req: 
+    uv pip compile --group test pyproject.toml -o requirements.txt
+
+## Run pytest within isolated .venv and environment.
+py_requirements *args: 
+    #!/usr/bin/env bash
+    set -euo pipefail
+
+    PY="{%raw%}{{PYTHON_RUNTIME}}{%endraw%}"
+
+    TMP_DIR="$(mktemp -d -t venvreq.XXXXXX)"
+    VENV_DIR="$TMP_DIR/venv"
+
+    "$PY" -m venv "$VENV_DIR"
+    source "$VENV_DIR/bin/activate"
+
+    # Use pip from this venv
+    python -m pip install --upgrade pip wheel
+    python -m pip install -r requirements.txt
+
+    # Run tests
+    pytest -q -s \
+      --ignore={%raw%}{{VENDOR_DIR}}{%endraw%} \
+      tests/ "$@"
+
+    deactivate
+    rm -rf "$TMP_DIR"
+
+
+ff: 
+    set -a && source _local/.env && set +a && functions-framework --target=run --port=8080 --debug

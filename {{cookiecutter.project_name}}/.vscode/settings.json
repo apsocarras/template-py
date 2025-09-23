@@ -1,0 +1,57 @@
+{
+    "yaml.schemas": {
+        "https://squidfunk.github.io/mkdocs-material/schema.json": "mkdocs.yml"
+    },
+    "yaml.customTags": [ 
+        "!ENV scalar",
+        "!ENV sequence",
+        "!relative scalar",
+        "tag:yaml.org,2002:python/name:material.extensions.emoji.to_svg",
+        "tag:yaml.org,2002:python/name:material.extensions.emoji.twemoji",
+        "tag:yaml.org,2002:python/name:pymdownx.superfences.fence_code_format",
+        "tag:yaml.org,2002:python/object/apply:pymdownx.slugs.slugify mapping"
+    ],
+
+    "python.analysis.diagnosticSeverityOverrides": {
+        "deprecatedMemberUse": "error"
+    },
+    "python.analysis.excludeDeprecated": true,
+    "python.analysis.autoImportCompletions": true,
+
+    "jupyter.interactiveWindow.textEditor.executeSelection": true,
+    "[python]": {
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+            "source.fixAll": "explicit",
+            "source.organizeImports": "explicit"
+        },
+        "editor.defaultFormatter": "charliermarsh.ruff"
+    },
+
+    "workbench.iconTheme": "vscode-icons",
+    "security.workspace.trust.untrustedFiles": "open",
+    "git.mergeEditor": true,
+    
+    "markdown.math.enabled": true,
+    "[markdown]": {
+        "editor.formatOnSave": true,
+        "editor.formatOnPaste": true,
+        "editor.codeActionsOnSave": {
+           "source.fixAll.markdownlint": "always"
+          },
+          "editor.defaultFormatter": "darkriszty.markdown-table-prettify"
+    },
+    "betterAlign.surroundSpace": {
+      "colon": [0, 1],
+      "assignment": [1, 1],
+      "arrow": [1, 1],
+      "comment": 2
+    },
+    "breadcrumbs.enabled": false,
+    "files.associations": {
+      "*.sql": "jinja-sql",
+      "*.yml": "jinja-yaml",
+      "*.yaml": "jinja-yaml",
+      "*.just": "just"
+    },
+}
