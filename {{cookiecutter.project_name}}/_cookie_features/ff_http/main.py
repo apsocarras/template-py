@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import json
 import logging
 import logging.config
@@ -13,7 +15,7 @@ from .utils.multiroute_context import internal_context
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
 
-with open(Path("logging_config.json"), "r") as file:
+with open(Path("logging_config.json")) as file:
     config = json.load(file)  # pyright: ignore[reportAny]
 logging.config.dictConfig(config)  # pyright: ignore[reportAny]
 
@@ -38,7 +40,7 @@ def echo() -> ResponseReturnValue:
         ), HTTPStatus.OK
     except Exception as e:
         return flask.jsonify(
-            {"error": f"Internal error: {str(e)}"}
+            {"error": f"Internal error: {e!s}"}
         ), HTTPStatus.INTERNAL_SERVER_ERROR
 
 

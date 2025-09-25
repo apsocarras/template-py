@@ -24,6 +24,13 @@ def copy_feature(name: str):
             )
 
 
+def create_env_file():
+    path = PROJECT_ROOT / "_local" / ".env"
+    with path.open("w") as file:
+        _ = file.write("GCP_PROJECT_ID=" + "{{cookiecutter.gcp_project}}\n")
+        _ = file.write("GCP_REGION=" + "{{cookiecutter.gcp_region}}\n")
+
+
 def main():
     ff = "{{ cookiecutter.ff_type }}".lower()
     match ff:
@@ -38,6 +45,8 @@ def main():
 
     if "{{cookiecutter.keep_features_dir}}".lower() == "false":
         shutil.rmtree(FEATURES_DIR)
+
+    create_env_file()
 
 
 if __name__ == "__main__":

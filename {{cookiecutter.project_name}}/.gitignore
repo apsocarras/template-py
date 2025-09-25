@@ -1,5 +1,5 @@
 _local/
-_local/!.gitkeep
+!_local/.gitkeep
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

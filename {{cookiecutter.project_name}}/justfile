@@ -1,11 +1,52 @@
-## .justfile for managing python-specific dev tasks
+## .justfile for managing python dev tasks
 # Inspired by this informative article: https://lukasatkinson.de/2025/just-dont-tox/
 
 ## Globals/env 
+set dotenv-load := true
+dotenv-filename := "_local/.env"
+
 PYTHON_RUNTIME := `echo python$(cat .python-version)`
 REPO := `basename "$PWD" | tr ' ' '_'`
 VENDOR_DIR := "libs/"
 DEPRECATED := "deprecated/"
+
+{% if cookiecutter.ff_type != "none" %}
+SERVICE_ACCOUNT := "scheduler-invoker@{%raw%}{{GCP_PROJECT_ID}}{%endraw%}.iam.gserviceaccount.com"
+JOB_NAME := "{%raw%}{{REPO}}{%endraw%}-job"
+CRON_SCHEDULE := "0 9 * * *"
+FUNCTION_URI := `gcloud functions describe {%raw%}{{REPO}}{%endraw%}`
+ 
+TRIGGER_METHOD := {{cookiecutter.cloud_scheduler_method}}
+{%- endif -%}
+
+default: help
+help:
+    @echo ""
+    @echo "Available commands in this justfile:"
+    @echo ""
+    @echo "  qa [args]         Run lint, type checks, tests, and coverage"
+    @echo "  compose           Start docker compose services (note: the template doesn't include any)"
+    @echo "  cov               Generate HTML coverage report"
+    @echo "  test [args]       Run pytest with coverage"
+    @echo "  lint [args]       Run ruff linter"
+    @echo "  type [args]       Run mypy type checks"
+    @echo "  type_main         Run mypy on main/"
+    @echo "  type_utils        Run mypy on utils/"
+    @echo "  type_src          Run mypy on SRC/"
+    @echo "  py312 [args]      Run pytest in isolated Python 3.12 environment with uv"
+    @echo "  py311 [args]      Run pytest in isolated Python 3.11 environment with uv"
+    @echo "  py310 [args]      ...Guess."
+    @echo "  py_requirements   Run tests inside isolated venv with requirements.txt (simulates GCP deployment)."
+    @echo "  toml_req          Compile requirements.txt from pyproject.toml (includes `test` group)."
+    {%- if cookiecutter.ff_type == "http" -%}
+    @echo "  ff                       Run functions-framework locally with _local/.env vars."
+    @echo "  deploy_gcloud            Deploy codebase to GCP Cloud Functions."
+    @echo "  schedule_gcloud          Create a Cloud Scheduler job to trigger the function."
+    @echo "  update_schedule_gcloud   Update the existing Cloud Scheduler job (schedule, URI, OIDC)."
+    @echo "  create_cloud_scheduler_sa Create and configure a service account for Cloud Scheduler (OIDC + run.invoker)."    {%- endif -%}
+    @echo ""
+    @echo "Tip: Use 'just <command> --help' for command-specific flags (if supported)."
+    @echo ""
 
 ## Commands 
 set shell := ['uv', 'run', 'bash', '-euxo', 'pipefail', '-c']
@@ -39,17 +80,30 @@ type_utils:
 type_src: 
     mypy SRC
 
+toml_req: 
+    uv pip compile --group test pyproject.toml -o requirements.txt
+
 py312 *args: 
     #!/bin/sh
     uv run --isolated --python=3.12 pytest -q -s \
       --ignore={%raw%}{{VENDOR_DIR}}{%endraw%} \
       tests/ "$@"
 
-toml_req: 
-    uv pip compile --group test pyproject.toml -o requirements.txt
+py311 *args: 
+    #!/bin/sh
+    uv run --isolated --python=3.11 pytest -q -s \
+      --ignore={%raw%}{{VENDOR_DIR}}{%endraw%} \
+      tests/ "$@"
 
-## Run pytest within isolated .venv and environment.
+py310 *args: 
+    #!/bin/sh
+    uv run --isolated --python=3.10 pytest -q -s \
+      --ignore={%raw%}{{VENDOR_DIR}}{%endraw%} \
+      tests/ "$@"
+
 py_requirements *args: 
+    toml_req
+    
     #!/usr/bin/env bash
     set -euo pipefail
 
@@ -74,5 +128,69 @@ py_requirements *args:
     rm -rf "$TMP_DIR"
 
 
+{% if cookiecutter.ff_type == "http" %}
 ff: 
     set -a && source _local/.env && set +a && functions-framework --target=run --port=8080 --debug
+deploy_gcloud: 
+    gcloud functions deploy {%raw%}{{REPO}}{%endraw%} \
+        --gen2 \
+        --project={%raw%}{{GCP_PROJECT_ID}}{%endraw%} \
+        --region={%raw%}{{GCP_REGION}}{%endraw%} \
+        --runtime={%raw%}{{PYTHON_RUNTIME}}{%endraw%} \
+        --memory=512MB \
+        --trigger-http \
+        --source=. \
+        --entry-point=run
+
+schedule_gcloud: 
+	gcloud scheduler jobs create http {%raw%}{{REPO}}{%endraw%}-job \
+		--project={%raw%}{{GCP_PROJECT_ID}}{%endraw%} \
+		--location={%raw%}{{GCP_REGION}}{%endraw%} \
+		--schedule={%raw%}{{CRON_SCHEDULE}}{%endraw%} \
+		--uri=$$(gcloud functions describe {%raw%}{{REPO}}{%endraw%} \
+        --gen2 \
+        --region={%raw%}{{GCP_REGION}}{%endraw%} \
+        --format="value(serviceConfig.uri)") \
+		--http-method=POST \
+		--oidc-service-account-email={%raw%}{{SERVICE_ACCOUNT}}{%endraw%} \
+		--oidc-token-audience=$$(gcloud functions describe {%raw%}{{REPO}}{%endraw%}
+
+update_schedule_gcloud:
+    gcloud scheduler jobs update http {%raw%}{{JOB_NAME}}{%endraw%} \
+    --project={%raw%}{{GCP_PROJECT_ID}}{%endraw%} \
+    --location={%raw%}{{GCP_REGION}}{%endraw%} \
+    --schedule={%raw%}{{CRON_SCHEDULE}}{%endraw%} \
+    --uri={%raw%}{{FUNCTION_URI}}{%endraw%} \
+    --http-method=POST \
+    --oidc-service-account-email={%raw%}{{SERVICE_ACCOUNT}}{%endraw%} \
+    --oidc-token-audience={%raw%}{{FUNCTION_URI}}{%endraw%}
+
+create_cloud_scheduler_sa: 
+    echo "Creating service account: {%raw%}{{SERVICE_ACCOUNT}}{%endraw%}"
+    gcloud iam service-accounts create scheduler-invoker \
+      --project={%raw%}{{GCP_PROJECT_ID}}{%endraw%} \
+      --display-name="Cloud Scheduler Invoker" || true
+
+    echo "Granting Cloud Run Invoker role"
+    gcloud run services add-iam-policy-binding {%raw%}{{REPO}}{%endraw%} \
+      --project={%raw%}{{GCP_PROJECT_ID}}{%endraw%} \
+      --region={%raw%}{{GCP_REGION}}{%endraw%} \
+      --member=serviceAccount:{%raw%}{{SERVICE_ACCOUNT}}{%endraw%} \
+      --role=roles/run.invoker
+
+    echo "Allowing Cloud Scheduler agent to mint OIDC tokens"
+    PROJECT_NUMBER=$(gcloud projects describe {%raw%}{{GCP_PROJECT_ID}}{%endraw%} --format='value(projectNumber)'); \
+    gcloud iam service-accounts add-iam-policy-binding {%raw%}{{SERVICE_ACCOUNT}}{%endraw%} \
+      --project={%raw%}{{GCP_PROJECT_ID}}{%endraw%} \
+      --member=serviceAccount:$$PROJECT_NUMBER@cloudscheduler.gserviceaccount.com \
+      --role=roles/iam.serviceAccountTokenCreator
+
+    echo "Enabling APIs"
+    gcloud services enable \
+      cloudfunctions.googleapis.com \
+      run.googleapis.com \
+      iamcredentials.googleapis.com \
+      cloudscheduler.googleapis.com \
+      --project={%raw%}{{GCP_PROJECT_ID}}{%endraw%}
+
+{% endif %}
