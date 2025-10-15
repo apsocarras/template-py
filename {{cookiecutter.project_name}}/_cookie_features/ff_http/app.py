@@ -1,3 +1,5 @@
+"""FIXME: Add Description"""
+
 from __future__ import annotations
 
 import json
@@ -9,11 +11,13 @@ from pathlib import Path
 import flask
 from flask.typing import ResponseReturnValue
 from flask.wrappers import Response
+from type_cellar import SequenceNotStr as Sequence  # noqa: F401
 
-from .utils.multiroute_context import internal_context
+from .utils.multiroute_context import internal_context  # type: ignore[import-not-found]
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
+
 
 with open(Path("logging_config.json")) as file:
     config = json.load(file)  # pyright: ignore[reportAny]
@@ -26,6 +30,7 @@ app = flask.Flask("internal")
 
 @app.route("/healthcheck", methods=["GET"])
 def health_check() -> ResponseReturnValue:
+    """Check that the app is up and running with no degrade statuses"""
     return flask.jsonify({"status": "OK"}), HTTPStatus.OK
 
 
@@ -45,16 +50,15 @@ def echo() -> ResponseReturnValue:
 
 
 # === MAIN ENTRY POINT ===
-def run(request: flask.Request):
-    """
-    Main entry point for Cloud Functions.
+def run(request: flask.Request) -> Response:
+    """Main entry point for Cloud Functions.
+
     Routes requests based on path to the handlers registered with the @app.route decorator.
 
     NOTE: The name of this function needs to match:
         * `--entry-point` flag when using gcloud functions deploy (makefile or CLI)
         * `--target` flag when running locally with `functions-framework` command
     """
-
     with internal_context(app, request):
         return_value: Response = app.full_dispatch_request()
 
