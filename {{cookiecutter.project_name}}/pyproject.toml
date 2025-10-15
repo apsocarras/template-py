@@ -36,6 +36,7 @@ dev = [
     "mypy>=1.17.1",
     "ruff>=0.12.11",
     "deptry>=0.22.0",
+    "pre-commit>=4.3.0",
 ]
 
 test = [
