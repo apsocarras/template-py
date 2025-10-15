@@ -1,2 +1,5 @@
-def hello() -> str:
-    return "Hello from {{cookiecutter.pkg_name}}!"
+"""FIXME: Add description"""
+
+from __future__ import annotations
+
+from type_cellar import SequenceNotStr as Sequence

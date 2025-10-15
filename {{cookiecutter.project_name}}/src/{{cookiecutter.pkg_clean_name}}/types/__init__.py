@@ -1,3 +1,5 @@
-from ._types import NonStrSequence
+"""Publically exported types for the package"""
 
-__all__ = ["NonStrSequence"]
+from __future__ import annotations
+
+from type_cellar import SequenceNotStr as Sequence
