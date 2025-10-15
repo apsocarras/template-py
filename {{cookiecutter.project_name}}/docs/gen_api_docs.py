@@ -1,13 +1,21 @@
-"""
-Generate the code reference pages and navigation.
+"""Generate the code reference pages and navigation.
+
 See: https://lukasatkinson.de/dump/2023-08-25-python-docstrings-sphinx/
 The author suggests using Jinja templates
-    (For example -- the index pages are right now all empty. It would be much better if they contained links to submodules)
+    (For example -- the index pages are right now all empty.
+    It would be much better if they contained links to submodules.
+    Consider the griffoner package for creating templates.)
 """
+
+# ruff: noqa: F401
+from __future__ import annotations
 
 from pathlib import Path
 
 import mkdocs_gen_files
+from type_cellar import (
+    SequenceNotStr as Sequence,  # pyright: ignore[reportUnusedImport]
+)
 
 nav = mkdocs_gen_files.Nav()
 for path in sorted(Path("src").rglob("*.py")):
