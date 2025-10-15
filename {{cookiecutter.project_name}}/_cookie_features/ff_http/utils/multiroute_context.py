@@ -5,12 +5,15 @@ https://medium.com/google-cloud/use-multiple-paths-in-cloud-functions-python-and
 Adapted this code to make it more """pythonic"""
 '''
 
+from __future__ import annotations
+
 from collections.abc import Generator
 from contextlib import contextmanager
 from typing import Any
 
 import flask
 from flask.ctx import RequestContext
+from type_cellar import SequenceNotStr as Sequence  # noqa: F401
 
 
 @contextmanager
