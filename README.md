@@ -1,6 +1,6 @@
 # template-py
 
-Custom template for python projects.
+Custom template for python projects (GCP-focused)
 
 ```bash
 ## PREREQ: activate venv and install cookiecutter 
@@ -11,3 +11,9 @@ sva # source .venv/bin/activate
 cookiecutter https://github.com/apsocarras/template-py.git 
  
 ```
+
+## Requires
+
+* [`uv`](https://docs.astral.sh/uv/)
+
+* [`just`](https://github.com/casey/just) - command runner
