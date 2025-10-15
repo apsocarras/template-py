@@ -2,26 +2,21 @@
 minimum_pre_commit_version: 3.0.0
 repos:
   - repo: https://github.com/apsocarras/ahooks.git
+    rev: v0.0.0
     hooks:
-      - id: emit-requirements
-        name: Emit requirements.txt from pyproject.toml using `uv`
-        language: system
-        entry: python -m ahooks.emit_requirements
-        pass_filenames: false
-        files: ^(pyproject\.toml|requirements\.txt)$
-        stages: [pre-commit, pre-push]
       - id: block-manual-req-edits
         name: Block manual edits to requirements.txt
         language: system
-        entry: "\n     bash -c\n            if git diff --cached --name-only | grep -q \"^requirements\\.txt$\" &&\n                ! git diff --cached --name-only | grep -q \"^pyproject\\.toml$\"; then\n                echo \"Edit pyproject.toml and run the emitter; don't hand-edit requirements.txt.\"\n                exit 1\n            fi\n    "
-        pass_filenames: false
+        entry: "\n        bash -c 'if git diff --cached --name-only | grep -q \"^requirements\\.txt$\"\n            && ! git diff --cached --name-only | grep -q \"^pyproject\\.toml$\";\n            then echo\n            \"Edit pyproject.toml and run the emitter;\n            don'\\''t hand-edit requirements.txt.\"; exit 1; fi'\n    "
         files: ^requirements\.txt$
         stages: [pre-commit, pre-push]
-      - id: env-skeleton
-        name: Create an example `.env` file with only the names of variables
-        language: system
-        entry: python -m ahooks.env_skeleton
-        args: [., .env, .]
+      - id: emit-requirements
+        name: Emit requirements.txt from pyproject.toml using `uv`
+        additional_dependencies:
+          - ahooks>=0.1.0
+        language: python
+        entry: python -m ahooks.emit_requirements
         pass_filenames: false
+        files: ^(pyproject\.toml|requirements\.txt)$
         stages: [pre-commit, pre-push]
 ...
