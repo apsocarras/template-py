@@ -9,25 +9,28 @@ import importlib
 import pkgutil
 from collections.abc import Iterator
 
+from beartype.claw import beartype_package
 
-def iter_modules(package) -> Iterator[pkgutil.ModuleInfo]:
+beartype_package("{{cookiecutter.pkg_clean_name}}")
+
+
+def iter_modules() -> Iterator[pkgutil.ModuleInfo]:
     pkg = importlib.import_module("{{cookiecutter.pkg_clean_name}}")
     return pkgutil.walk_packages(pkg.__path__, pkg.__name__ + ".")
 
 
-def test_all_imports():
-    """Test all the modules in the package import successfully"""
-
+def test_import_all_package_modules():
     def import_error(name: str) -> Exception | None:
         try:
-            importlib.import_module(name)
-            return None
+            _ = importlib.import_module(name)
         except Exception as e:
             return e
+        else:
+            return None
 
     import_errors = {
         mod.name: mod_error
-        for mod in iter_modules("{{cookiecutter.pkg_clean_name}}")
+        for mod in iter_modules()
         if (mod_error := import_error(mod.name)) is not None
     }
 
