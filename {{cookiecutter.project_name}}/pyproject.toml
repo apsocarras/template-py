@@ -199,3 +199,10 @@ ignore-decorators = [
     "typing.overload", 
     "typing_extensions.overload"
 ]
+
+[tool.coverage.run]
+source = ["src"]
+omit = [
+  # please don't put business logic in __init__.py...
+  "**/__init__*",
+]

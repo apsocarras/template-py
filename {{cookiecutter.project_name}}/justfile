@@ -45,6 +45,7 @@ cov-serve:
 
 test *args:
     coverage run -m pytest -q -s \
+      --doctest-modules \
       --ignore={%raw%}{{VENDOR_DIR}}{%endraw%} \
       tests/ "$@"
 

@@ -39,6 +39,8 @@ cookiecutter https://github.com/apsocarras/template-py.git
 
 #### Code formatting and Linting: [`ruff`](https://astral.sh/ruff)
 
+#### Documentation: [`mkdocs`](https://mkdocstrings.github.io/)
+
 #### Type Checking
 
 * [`mypy`](https://mypy.readthedocs.io/en/stable/) - Static type checking (CLI & CI/CD)
@@ -53,8 +55,8 @@ cookiecutter https://github.com/apsocarras/template-py.git
 
 [`tests/`]({{cookiecutter.project_name}}/tests/smoke_test.py):
 
-* [`pytest`](https://docs.pytest.org/en/stable/) (obviously)
-* [`coverage`](https://coverage.readthedocs.io/en/7.11.0/) (marginally less obviously)
+* [`pytest`](https://docs.pytest.org/en/stable/) (obviously) with [`coverage`](https://coverage.readthedocs.io/en/7.11.0/)
+  * Also runs any [`doctests`](https://docs.python.org/3/library/doctest.html) in `src/`
 * [`testmon`](https://testmon.org) - Run only affected tests (used pre-push)
 * [`hypothesis`](https://hypothesis.readthedocs.io/en/latest/) and [`mimesis`](https://mimesis.name/master/) for mock data generation
 
