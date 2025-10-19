@@ -19,4 +19,16 @@ repos:
         pass_filenames: false
         files: ^(pyproject\.toml|requirements\.txt)$
         stages: [pre-commit, pre-push]
+  - repo: local
+    hooks:
+      - id: pytest
+        name: Pytest (testmon)
+        description: (https://testmon.org/) Run tests affected by changed files. Full tests in CI.
+        language: system 
+        additional_dependencies: 
+          - just>=1.42.4
+        entry: just test tests/ --testmon
+        pass_filenames: false
+        files: \.py$
+        stages: [pre-push]
 ...
