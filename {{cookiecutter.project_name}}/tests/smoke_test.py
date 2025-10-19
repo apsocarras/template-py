@@ -19,7 +19,7 @@ def iter_modules() -> Iterator[pkgutil.ModuleInfo]:
     return pkgutil.walk_packages(pkg.__path__, pkg.__name__ + ".")
 
 
-def test_import_all_package_modules():
+def test_import_all_package_modules() -> None:
     def import_error(name: str) -> Exception | None:
         try:
             _ = importlib.import_module(name)

@@ -1,5 +1,6 @@
 import logging
 from pathlib import Path
+from typing import Any
 
 import dotenv
 import pytest
@@ -15,7 +16,7 @@ PROJ_ROOT = Path(__file__).parent.parent
 
 
 @pytest.fixture(scope="session")
-def env_values():
+def env_values() -> dict[str, Any]:
     p = PROJ_ROOT / "_local" / ".env"
     if not p.exists():
         raise FileNotFoundError(p)
