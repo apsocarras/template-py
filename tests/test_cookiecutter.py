@@ -101,7 +101,7 @@ def test_justfile(extra, value, cookies, tmp_path):
                 assert subprocess.check_call(shlex.split("just type_src")) == 0
                 assert subprocess.check_call(shlex.split("just type_utils")) == 0
                 assert subprocess.check_call(shlex.split("just type_app")) == 0
-                assert subprocess.check_call(shlex.split("just type_all")) == 0
+                assert subprocess.check_call(shlex.split("just types")) == 0
                 assert subprocess.check_call(shlex.split("just dist")) == 0
                 assert subprocess.check_call(shlex.split("just py311")) == 0
                 # assert subprocess.check_call(shlex.split("just py_312")) == 0

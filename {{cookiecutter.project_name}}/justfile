@@ -28,7 +28,7 @@ TRIGGER_METHOD := "{{cookiecutter.cloud_scheduler_method}}"
 set shell := ['uv', 'run', 'bash', '-euxo', 'pipefail', '-c']
 set positional-arguments 
 
-qa *args: lint type_all deps (test) cov
+qa *args: lint types deps (test) cov
 
 deps: 
     deptry -e .venv/ -e deprecated/ -e libs/ -e docs/ -e tests/ .
@@ -68,7 +68,7 @@ type_utils:
 type_src: 
     mypy src/
 
-type_all:
+types:
     mypy .
 
 py312 *args: 
