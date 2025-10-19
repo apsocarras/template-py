@@ -28,7 +28,7 @@ TRIGGER_METHOD := "{{cookiecutter.cloud_scheduler_method}}"
 set shell := ['uv', 'run', 'bash', '-euxo', 'pipefail', '-c']
 set positional-arguments 
 
-qa *args: deps lint type_src (test) cov
+qa *args: lint type_all deps (test) cov
 
 deps: 
     deptry -e .venv/ -e deprecated/ -e libs/ -e docs/ -e tests/ .
@@ -39,13 +39,22 @@ compose:
 cov: 
     coverage html
 
+cov-serve: 
+    coverage html 
+    python -m http.server htmlcov -b localhost 0
+
 test *args:
     coverage run -m pytest -q -s \
       --ignore={%raw%}{{VENDOR_DIR}}{%endraw%} \
       tests/ "$@"
 
-lint *args:
-    ruff check "$@"
+lint:
+    ruff format --check --diff .
+    ruff check .
+
+fix *files: 
+    ruff format -- "$@"
+    ruff check --fix-only --show-fixes -- "$@"
 
 type *args:
     mypy "$@"
@@ -59,11 +68,25 @@ type_utils:
 type_src: 
     mypy src/
 
+type_all:
+    mypy .
+
 py312 *args: 
     uv run --isolated --group test --python=3.12 pytest -q -s tests/ "$@"
 
 py311 *args: 
     uv run --isolated --group test --python=3.11 pytest -q -s tests/ "$@"
+
+dist:
+    #!/usr/bin/env bash
+    set -euo pipefail
+
+    echo "{%raw%}{{BOLD}}{%endraw%}uv build{%raw%}{{NORMAL}}{%endraw%}"
+    uv build
+    echo "{%raw%}{{BOLD}}{%endraw%}running smoke tests{%raw%}{{NORMAL}}{%endraw%}"
+
+    uv run --isolated --group test --python={{cookiecutter.py_runtime}} pytest -q -s tests/smoke_test.py
+    
 
 {% if cookiecutter.ff_type == "http" %}
 ff: 
