@@ -86,3 +86,5 @@ Here's how to make your own project templates with it:
     * Collect user input
     * Use [jinja](https://jinja.palletsprojects.com/en/stable/) to replace these placeholders with input
     * Run any post-generation hooks you define yourself
+
+Note that `{{` and `}}` will make `jinja` attempt to replace anything enclosed within. Block that behavior with `{%raw%}`/`{%endraw%}` escape block.
