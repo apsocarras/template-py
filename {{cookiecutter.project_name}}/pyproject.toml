@@ -83,7 +83,7 @@ check_untyped_defs = true
 disallow_any_unimported = true
 warn_return_any = true
 show_error_codes = true
-exclude = "^(libs/|deprecated/)"
+exclude = "^(libs/|deprecated/|docs/)"
 
 [[tool.mypy.overrides]]
 module = ["requests", "yaml"]
