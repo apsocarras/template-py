@@ -1,0 +1,43 @@
+## Source: https://github.com/latk/ganzua/blob/main/.github/workflows/release.yaml
+# TODO: add a griffe check action to help ensure no breaking changes to the API
+
+name: Publish to PyPI
+
+on:
+  # Only run when a tag is pushed
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:  # allow manual invocation
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup
+        with:
+          python-version: '{{ cookiecutter.py_runtime }}'
+      - run: just -v dist
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist/
+
+  # Compare the packaging guide:
+  # https://packaging.python.org/en/latest/guides/publishing-package-distribution-releases-using-github-actions-ci-cd-workflows/
+  publish-to-pypi:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: pypi
+      url: https://pypi.org/p/{{ cookiecutter.project_name }}
+    permissions:
+      id-token: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist/
+      - run: ls -l dist
+      - uses: pypa/gh-action-pypi-publish@release/v1
