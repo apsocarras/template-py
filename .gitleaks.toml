@@ -1,0 +1,22 @@
+title = "{{ cookiecutter.project_name }} - Gitleaks Configuration"
+description = "Detect and prevent secrets from entering the codebase."
+
+[[ruleset]]
+description = "Use default gitleaks rules"
+type = "builtin"
+name = "gitleaks_default"
+
+[allowlist]
+description = "Ignore known safe files and patterns"
+files = [
+  '''^\.?env\.example$''',
+  '''^\.?env\.skeleton$''',
+]
+
+regexes = [
+  '''dummy_api_key''',
+  '''example_secret''',
+  '''PLACEHOLDER_[A-Z_]+'''
+]
+
+entropy = 5.0
