@@ -29,11 +29,11 @@ cookiecutter https://github.com/apsocarras/template-py.git
 * `src/` layout, with `docs`, `dev`, and `test` dependency groups
 
 * Optional `GCP` python cloud function add-ons:
-  * [`ff_http`]({{cookiecutter.project_name}}/_cookie_features/ff_http): A `functions-framework` flask app with a custom [shim]({{cookiecutter.project_name}}/_cookie_features/ff_http/utils/multiroute_context.py) for multi-route request dispatch. Includes useful flask utilities for logging, status checks, etc.
-  * [`ff_pubsub`]({{cookiecutter.project_name}}/_cookie_features/ff_pubsub):  Alternatively, an example app for a pub-sub driven function.
+  * [`ff_http/`]({{cookiecutter.project_name}}/_cookie_features/ff_http): A `functions-framework` flask app with a custom [shim]({{cookiecutter.project_name}}/_cookie_features/ff_http/utils/multiroute_context.py) for multi-route request dispatch. Includes useful flask utilities for logging, status checks, etc.
+  * [`ff_pubsub/`]({{cookiecutter.project_name}}/_cookie_features/ff_pubsub):  Alternatively, an example app for a pub-sub driven function.
   * GCP deployment commands (see [`justfile`](/{{cookiecutter.project_name}}/justfile))
 
-* `attrs` supremacy (🚫🫸🏻 [pydantic hegemony](https://www.youtube.com/watch?v=vCLetdhswMg))
+* [`attrs`](https://www.attrs.org/en/stable/) supremacy (🚫🫸🏻 [pydantic hegemony](https://threeofwands.com/why-i-use-attrs-instead-of-pydantic/))
 
 ### Tools
 
@@ -45,7 +45,13 @@ cookiecutter https://github.com/apsocarras/template-py.git
 * [`pyright`](https://docs.basedpyright.com/) - Static type checking (IDE/LSP)
 * [`beartype`](https://beartype.readthedocs.io/en/latest/) - Runtime type checking (test suite)
 
+#### Depdendencies
+
+* [`deptry`](https://deptry.com/rules-violations/) - Guards against dependency vulnerabilities
+
 #### Testing
+
+[`tests/`]({{cookiecutter.project_name}}/tests/smoke_test.py):
 
 * [`pytest`](https://docs.pytest.org/en/stable/) (obviously)
 * [`coverage`](https://coverage.readthedocs.io/en/7.11.0/) (marginally less obviously)
